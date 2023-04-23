@@ -3,7 +3,7 @@ import torch.nn.functional as F
 from torch.cuda.amp.grad_scaler import GradScaler
 from torch.cuda.amp import autocast
 from MedISeg.unet2d.NetworkTrainer.network_trainer import NetworkTrainer
-from MedISeg.unet2d.NetworkTrainer.utils.losses_imbalance import IOUloss
+from MedISeg.unet2d.NetworkTrainer.utils.losses_imbalance import IOUloss,WCELoss
 from network.CTO_net import CTO
 
 class CTOTrainer(NetworkTrainer):
@@ -18,4 +18,7 @@ class CTOTrainer(NetworkTrainer):
     def structure_loss(self,pred,mask):
         weit = 1 + 5 * torch.abs(F.avg_pool2d(mask.float(), kernel_size=31, stride=1, padding=15) - mask)
         WIOU = IOUloss(smooth=1)
+        WCE = WCELoss()
         iou_loss = WIOU(pred,mask,weit)
+        ce_loss = WCE(pred,mask,weit)
+        return (iou_loss+ce_loss).mean()

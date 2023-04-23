@@ -8,7 +8,7 @@ def main():
     opt.parse()
     opt.save_options()
 
-    # set_loss() is not used here because in this paper we have innovative loss functions
+    # set_loss() is not used here because in this paper we use more complex loss functions
     trainer = CTOTrainer(opt)
     trainer.set_GPU_device()
     trainer.set_logging()

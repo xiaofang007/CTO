@@ -1,5 +1,5 @@
 import sys
-sys.path.append('../')
+sys.path.append("../CTO")
 from network_trainer import CTOTrainer
 from options import CTO_Options
 
@@ -8,7 +8,6 @@ def main():
     opt.parse()
     opt.save_options()
 
-    # set_loss() is not used here because in this paper we use more complex loss functions
     trainer = CTOTrainer(opt)
     trainer.set_GPU_device()
     trainer.set_logging()

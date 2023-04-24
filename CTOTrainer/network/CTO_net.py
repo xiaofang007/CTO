@@ -546,10 +546,10 @@ class CTO(nn.Module):
         self.dm3 = DM()
         self.dm4 = DM()
 
-        self.predictor1 = nn.Conv2d(64, 1, 1)
-        self.predictor2 = nn.Conv2d(64, 1, 1)
-        self.predictor3 = nn.Conv2d(64, 1, 1)
-        self.predictor4 = nn.Conv2d(64, 1, 1)
+        self.predictor1 = nn.Conv2d(64, self.num_class, 1)
+        self.predictor2 = nn.Conv2d(64, self.num_class, 1)
+        self.predictor3 = nn.Conv2d(64, self.num_class, 1)
+        self.predictor4 = nn.Conv2d(64, self.num_class, 1)
 
     # def initialize_weights(self):
     # model_state = torch.load('./models/resnet50-19c8e357.pth')

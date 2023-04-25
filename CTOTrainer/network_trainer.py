@@ -19,7 +19,7 @@ class CTOTrainer(NetworkTrainer):
     
     def train(self,scaler,dice_loss):
         self.net.train()
-        loss_record3, loss_record2, loss_record1, loss_recorde = AverageMeter(), AverageMeter(), AverageMeter(), AverageMeter()
+        losses = AverageMeter()
         for i_batch, sampled_batch in enumerate(self.train_loader):
             volume_batch, label_batch = sampled_batch['image'], sampled_batch['label']
             edges = torch.from_numpy(get_gt_bnd(label_batch.numpy())).cuda()
@@ -39,6 +39,28 @@ class CTOTrainer(NetworkTrainer):
             torch.nn.utils.clip_grad_norm_(self.net.parameters(),self.opt.train['clip'])
             scaler.step(self.optimizer)
             scaler.update()
+            losses.update(loss.item(), volume_batch.size(0))
+        return losses.avg
+
+    def val(self,dice_loss):
+        self.net.eval()
+        val_losses = AverageMeter()
+        with torch.no_grad():
+            for i_batch, sampled_batch in enumerate(self.val_loader):
+                volume_batch, label_batch = sampled_batch['image'], sampled_batch['label']
+                edges = torch.from_numpy(get_gt_bnd(label_batch.numpy())).cuda()
+                volume_batch, label_batch = volume_batch.cuda(), label_batch.cuda()
+                if len(label_batch.shape) == 3:
+                    label_batch = label_batch.unsqueeze(1)
+                lateral_map_3, lateral_map_2, lateral_map_1, edge_map = self.net(volume_batch)
+                loss3 = structure_loss(lateral_map_3, label_batch)
+                loss2 = structure_loss(lateral_map_2, label_batch)
+                loss1 = structure_loss(lateral_map_1, label_batch)
+                losse = dice_loss(edge_map, edges)
+                loss =  loss3 + loss2 + loss1 + 3*losse
+                val_losses.update(loss.item(), volume_batch.size(0))
+        return val_losses.avg
+
 
     
     def run(self):
@@ -57,7 +79,7 @@ class CTOTrainer(NetworkTrainer):
             poly_lr(self.optimizer, self.opt.train['lr'], epoch, num_epoch)
             state = {'epoch': epoch + 1, 'state_dict': self.net.state_dict(), 'optimizer': self.optimizer.state_dict()}
             train_loss = self.train(scaler,dice_loss)
-            val_loss = self.val()
+            val_loss = self.val(dice_loss)
             self.logger_results.info('{:d}\t{:.4f}\t{:.4f}'.format(epoch+1, train_loss, val_loss))
 
             if val_loss<best_val_loss:

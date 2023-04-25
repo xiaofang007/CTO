@@ -1,5 +1,5 @@
 import sys
-sys.path.append("../CTO")
+sys.path.append("../")
 from network_trainer import CTOTrainer
 from options import CTO_Options
 

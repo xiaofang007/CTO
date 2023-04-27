@@ -1,5 +1,5 @@
 from skimage.morphology import dilation, disk
-from MedISeg.unet2d.NetworkTrainer.utils.losses_imbalance import IOUloss,WCELoss
+from MedISeg.unet2d.NetworkTrainer.utils.losses_imbalance import IOULoss,WCELoss
 from MedISeg.unet2d.NetworkTrainer.utils.util import *
 import torch
 import torch.nn.functional as F
@@ -26,8 +26,8 @@ def poly_lr(optimizer, init_lr, curr_epoch, max_epoch, power=0.9):
 
 def structure_loss(pred,mask):
     weit = 1 + 5 * torch.abs(F.avg_pool2d(mask.float(), kernel_size=31, stride=1, padding=15) - mask)
-    WIOU = IOUloss(smooth=1)
+    WIOU = IOULoss(smooth=1)
     WCE = WCELoss()
     iou_loss = WIOU(pred,mask,weit)
     ce_loss = WCE(pred,mask,weit)
-    return (iou_loss+ce_loss).mean()
+    return (iou_loss+ce_loss)

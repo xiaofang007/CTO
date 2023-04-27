@@ -21,6 +21,7 @@ class CTOTrainer(NetworkTrainer):
         self.net.train()
         losses = AverageMeter()
         for i_batch, sampled_batch in enumerate(self.train_loader):
+            self.optimizer.zero_grad()
             volume_batch, label_batch = sampled_batch['image'], sampled_batch['label']
             edges = torch.from_numpy(get_gt_bnd(label_batch.numpy())).cuda()
             volume_batch, label_batch = volume_batch.cuda(), label_batch.cuda()
@@ -36,7 +37,7 @@ class CTOTrainer(NetworkTrainer):
             
             scaler.scale(loss).backward()
             scaler.unscale_(self.optimizer)
-            torch.nn.utils.clip_grad_norm_(self.net.parameters(),self.opt.train['clip'])
+            torch.nn.utils.clip_grad_value_(self.net.parameters(),self.opt.train['clip'])
             scaler.step(self.optimizer)
             scaler.update()
             losses.update(loss.item(), volume_batch.size(0))
@@ -53,11 +54,7 @@ class CTOTrainer(NetworkTrainer):
                 if len(label_batch.shape) == 3:
                     label_batch = label_batch.unsqueeze(1)
                 lateral_map_3, lateral_map_2, lateral_map_1, edge_map = self.net(volume_batch)
-                loss3 = structure_loss(lateral_map_3, label_batch)
-                loss2 = structure_loss(lateral_map_2, label_batch)
-                loss1 = structure_loss(lateral_map_1, label_batch)
-                losse = dice_loss(edge_map, edges)
-                loss =  loss3 + loss2 + loss1 + 3*losse
+                loss = dice_loss(lateral_map_1,label_batch)
                 val_losses.update(loss.item(), volume_batch.size(0))
         return val_losses.avg
 

@@ -6,8 +6,8 @@ from tqdm import tqdm
 import torch
 from MedISeg.unet2d.NetworkTrainer.network_inference import NetworkInference
 from MedISeg.unet2d.NetworkTrainer.utils.accuracy import compute_metrics
-from MedISeg.unet2d.NetworkTrainer.utils.post_process import TTA_2d
-from MedISeg.unet2d.NetworkTrainer.utils.util import *
+from MedISeg.unet2d.NetworkTrainer.utils.post_process import *
+from CTOTrainer.util import *
 from network.CTO_net import CTO
 
 class CTOInference(NetworkInference):
@@ -41,11 +41,8 @@ class CTOInference(NetworkInference):
             input_list = tta.img_list(input)
             y_list = []
             for x in input_list:
-                x = torch.from_numpy(x.copy()).cuda()
-                if not self.opt.train['deeps']:
-                    y = self.net(x)
-                else:
-                    y = self.net(x)[0]
+                x = torch.from_numpy(x.copy()).cuda()               
+                y = self.net(x)[2]
                 y = torch.nn.Softmax(dim=1)(y)[:, 1]
                 y = y.cpu().detach().numpy()
                 y_list.append(y)

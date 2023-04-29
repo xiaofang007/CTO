@@ -25,6 +25,8 @@ def poly_lr(optimizer, init_lr, curr_epoch, max_epoch, power=0.9):
 
 
 def structure_loss(pred,mask):
+    if len(mask.shape) == 3:
+        mask = mask.unsqueeze(1)
     weit = 1 + 5 * torch.abs(F.avg_pool2d(mask.float(), kernel_size=31, stride=1, padding=15) - mask)
     WIOU = IOULoss(smooth=1)
     WCE = WCELoss()

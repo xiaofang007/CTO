@@ -13,7 +13,7 @@ The code is largely built using [MedISeg](https://github.com/hust-linyi/MedISeg)
 ### Using the code
 Please clone the following repositories:
 ```
-git clone https://github.com xiaofang007/CTO  
+git clone https://github.com/xiaofang007/CTO
 cd CTO  
 git clone https://github.com/hust-linyi/MedISeg
 ```
@@ -27,8 +27,15 @@ ISIC-2018: please follow the data preparation procedure in [MedISeg](https://git
 
 ### Training & Evaluation
 We provide the shell scripts for training and evaluation.  
-1. ISIC-2018:  
-
+ISIC-2018:  
+Run the following command for training
+```
+sh config/isic_baseline.sh
+```  
+Run the following command for testing
+```
+sh config/isic_test_baseline.sh
+```
 
 
 ## Citation

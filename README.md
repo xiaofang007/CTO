@@ -1,10 +1,11 @@
-# CTO
-This is the official code for "Rethinking Boundary Detection in Deep Learning Models for Medical Image Segmentation." 
+# Convolution, Transformer, and Operator (CTO)
+This is the official code for our IPMI2033 paper "Rethinking Boundary Detection in Deep Learning Models for Medical Image Segmentation." 
 
 > [Rethinking Boundary Detection in Deep Learning Models for Medical Image Segmentation](https://arxiv.org/abs/2305.00678) <br>
 > Yi Lin*, Dong Zhang*, Xiao Fang, Yufan Chen, Kwang-Ting Cheng, Hao Chen
 
 ## Highlights
+<p align="justify">
 We introduce a network architecture, referred to as Convolution, Transformer, and Operator (CTO), for medical image segmentation. CTO employs a combination of CNNs, ViT, and an explicit boundary detection operator to achieve high recognition accuracy while maintaining an optimal balance between accuracy and efficiency. The proposed CTO follows the standard encoder-decoder segmentation paradigm, where the encoder network incorporates a popular CNN backbone for capturing local semantic information, and a lightweight ViT assistant for integrating long-range dependencies. To enhance the learning capacity on boundary, a boundary-guided decoder network is proposed that uses a boundary mask obtained from a dedicated boundary detection operator as explicit supervision to guide the decoding learning process. 
 
 | Methods | mDice $\uparrow$ | HD $\uparrow$| Aorta | Gallb. | Kid (L) | Kid (R) | Liver | Panc. | Spleen | Stom. |
@@ -20,7 +21,6 @@ We introduce a network architecture, referred to as Convolution, Transformer, an
 | SwinUNet  | 79.12 | 21.55 | 85.47 | 66.53 | 83.28 | 79.61 | 94.29 | 56.58 | 90.66 | 76.60
 | CTO(Ours) | 81.10 | 18.75 | 87.72 | 66.44 | 84.49 | 81.77 | 94.88 | 62.74 | 90.60 | 80.20
 
-![method](fig/CTO.png)
 
 ## Usage
 The code is largely built using [MedISeg](https://github.com/hust-linyi/MedISeg) framework.
@@ -58,8 +58,16 @@ Please cite the paper if you use the code.
 @inproceedings{kgcoop23,
     title={Rethinking Boundary Detection in Deep Learning Models for Medical Image Segmentation},
     author={Yi Lin, Dong Zhang, Xiao Fang, Yufan Chen, Kwang-Ting Cheng, Hao Chen},
-    booktitle={Information Processing in Medical Imaging: 28th International Conference, IPMI 2023},
+    booktitle={Information Processing in Medical Imaging (IPMI)},
     year={2023}
+
+@article{zhang2022deep,
+  title={Deep learning for medical image segmentation: tricks, challenges and future directions},
+  author={Zhang, Dong and Lin, Yi and Chen, Hao and Tian, Zhuotao and Yang, Xin and Tang, Jinhui and Cheng, Kwang Ting},
+  journal={arXiv},
+  year={2022}
+}
+
 }
 ```
 

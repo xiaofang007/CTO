@@ -1,5 +1,5 @@
 # Convolution, Transformer, and Operator (CTO)
-This is the official code for our IPMI2033 paper "Rethinking Boundary Detection in Deep Learning Models for Medical Image Segmentation." 
+This is the official code for our IPMI 2033 paper:
 
 > [Rethinking Boundary Detection in Deep Learning Models for Medical Image Segmentation](https://arxiv.org/abs/2305.00678) <br>
 > Yi Lin*, Dong Zhang*, Xiao Fang, Yufan Chen, Kwang-Ting Cheng, Hao Chen
@@ -59,16 +59,13 @@ Please cite the paper if you use the code.
     title={Rethinking Boundary Detection in Deep Learning Models for Medical Image Segmentation},
     author={Yi Lin, Dong Zhang, Xiao Fang, Yufan Chen, Kwang-Ting Cheng, Hao Chen},
     booktitle={Information Processing in Medical Imaging (IPMI)},
-    year={2023}
+    year={2023}}
 
 @article{zhang2022deep,
   title={Deep learning for medical image segmentation: tricks, challenges and future directions},
   author={Zhang, Dong and Lin, Yi and Chen, Hao and Tian, Zhuotao and Yang, Xin and Tang, Jinhui and Cheng, Kwang Ting},
   journal={arXiv},
-  year={2022}
-}
-
-}
+  year={2022}}
 ```
 
 ## Acknowledgment 

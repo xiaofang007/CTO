@@ -9,7 +9,7 @@ This is the official code for our IPMI 2023 paper:
 We introduce a network architecture, referred to as Convolution, Transformer, and Operator (CTO), for medical image segmentation. CTO employs a combination of CNNs, ViT, and an explicit boundary detection operator to achieve high recognition accuracy while maintaining an optimal balance between accuracy and efficiency. The proposed CTO follows the standard encoder-decoder segmentation paradigm, where the encoder network incorporates a popular CNN backbone for capturing local semantic information, and a lightweight ViT assistant for integrating long-range dependencies. To enhance the learning capacity on boundary, a boundary-guided decoder network is proposed that uses a boundary mask obtained from a dedicated boundary detection operator as explicit supervision to guide the decoding learning process. 
 
 | Methods | mDice $\uparrow$ | HD $\uparrow$| Aorta | Gallb. | Kid (L) | Kid (R) | Liver | Panc. | Spleen | Stom. |
-|---------|------|------|------|------|------|------|------|------|------|------|
+|---------|--------|--------|------|------|------|------|------|------|------|------|
 | CLIP | 68.81 | - | 75.34 | 51.87 | 77.10 | 80.75 | 87.84 | 40.05 | 80.56 | 56.98 |
 | DARR | 69.77 | - | 74.74 | 53.77 | 72.31 | 73.24 | 94.08 | 54.18 | 89.90 | 45.96
 | U-Net | 76.85 | 39.70 | 89.07 | 69.72 | 77.77 | 68.60 | 93.43 | 53.98 | 86.67 | 75.58

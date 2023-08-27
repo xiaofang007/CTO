@@ -55,7 +55,7 @@ sh config/isic_test_baseline.sh
 ## Citation
 Please cite the paper if you use the code.
 ```bibtex
-@inproceedings{kgcoop23,
+@inproceedings{lin2023rethinking,
     title={Rethinking Boundary Detection in Deep Learning Models for Medical Image Segmentation},
     author={Yi Lin, Dong Zhang, Xiao Fang, Yufan Chen, Kwang-Ting Cheng, Hao Chen},
     booktitle={Information Processing in Medical Imaging (IPMI)},

@@ -48,14 +48,22 @@ ISIC-2018: please follow the data preparation procedure in [MedISeg](https://git
 ### Training & Evaluation
 We provide the shell scripts for training and evaluation.  
 ISIC-2018:  
-Run the following command for training
+Run the following command for training CTO
 ```
 sh config/isic_baseline.sh
 ```  
-Run the following command for testing
+Run the following command for training CTO that integrates StitchViT
+```
+sh config/isic_stitch.sh
+```  
+Run the following command for testing CTO
 ```
 sh config/isic_test_baseline.sh
 ```
+Run the following command for testing CTO that integrates StitchViT
+```
+sh config/isic_test_stitch.sh
+```  
 
 ## Citation
 Please cite the paper if you use the code.

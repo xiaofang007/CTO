@@ -5,6 +5,7 @@ from MedISeg.unet2d.NetworkTrainer.utils.losses_imbalance import DiceLoss
 from MedISeg.unet2d.NetworkTrainer.network_trainer import NetworkTrainer
 from MedISeg.unet2d.NetworkTrainer.utils.util import AverageMeter
 from network.CTO_net import CTO
+from network.CTO_net_Stitch_ViT import CTO_stitchvit
 from tqdm import tqdm
 from util import*
 
@@ -13,7 +14,12 @@ class CTOTrainer(NetworkTrainer):
         super().__init__(opt)
     
     def set_network(self):
-        self.net = CTO(self.opt.train['num_class'])
+        if "stitch" in self.opt.model['name']:
+            self.net = CTO_stitchvit(self.opt.train['num_class'])
+        elif "vanilla" in self.opt.model['name']:
+            self.net = CTO(self.opt.train['num_class'])
+        else:
+            raise TypeError("Model Type Error.")
         self.net = torch.nn.DataParallel(self.net,device_ids=self.opt.train['gpus'])
         self.net = self.net.cuda()
     

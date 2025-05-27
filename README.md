@@ -1,8 +1,11 @@
 # Convolution, Transformer, and Operator (CTO)
-This is the official code for our IPMI 2023 paper:
+This is the official code for our IPMI 2023 and Medical Image Analysis papers:
 
 > [Rethinking Boundary Detection in Deep Learning Models for Medical Image Segmentation](https://arxiv.org/abs/2305.00678) <br>
 > Yi Lin*, Dong Zhang*, Xiao Fang, Yufan Chen, Kwang-Ting Cheng, Hao Chen
+
+> [Rethinking boundary detection in deep learning-based medical image segmentation](https://arxiv.org/pdf/2505.04652) <br>
+> Yi Lin*, Dong Zhang*, Xiao Fang*, Yufan Chen, Kwang-Ting Cheng, Hao Chen
 
 ## Highlights
 <p align="justify">
@@ -21,6 +24,8 @@ We introduce a network architecture, referred to as Convolution, Transformer, an
 | SwinUNet  | 79.12 | 21.55 | 85.47 | 66.53 | 83.28 | 79.61 | 94.29 | 56.58 | 90.66 | 76.60
 | CTO(Ours) | 81.10 | 18.75 | 87.72 | 66.44 | 84.49 | 81.77 | 94.88 | 62.74 | 90.60 | 80.20
 
+## 🔥 Update Log
+- [2025/05/27] Release the code of CTO that integrates StitchViT.
 
 ## Usage
 The code is largely built using [MedISeg](https://github.com/hust-linyi/MedISeg) framework.
@@ -55,6 +60,14 @@ sh config/isic_test_baseline.sh
 ## Citation
 Please cite the paper if you use the code.
 ```bibtex
+@article{lin2025rethinking,
+  title={Rethinking boundary detection in deep learning-based medical image segmentation},
+  author={Lin, Yi and Zhang, Dong and Fang, Xiao and Chen, Yufan and Cheng, Kwang-Ting and Chen, Hao},
+  journal={Medical Image Analysis},
+  pages={103615},
+  year={2025},
+  publisher={Elsevier}}
+
 @inproceedings{lin2023rethinking,
     title={Rethinking Boundary Detection in Deep Learning Models for Medical Image Segmentation},
     author={Yi Lin, Dong Zhang, Xiao Fang, Yufan Chen, Kwang-Ting Cheng, Hao Chen},
